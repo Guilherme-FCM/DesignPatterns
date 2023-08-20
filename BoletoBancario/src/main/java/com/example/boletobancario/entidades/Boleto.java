@@ -94,4 +94,20 @@ public class Boleto {
     public void setContaBancaria(String contaBancaria) {
         this.contaBancaria = contaBancaria;
     }
+
+    @Override
+    public String toString() {
+        return "Boleto{" +
+                "id=" + id +
+                ", codBanco='" + codBanco + '\'' +
+                ", dataVencimento=" + dataVencimento +
+                ", dataPagamento=" + dataPagamento +
+                ", cpfCliente='" + cpfCliente + '\'' +
+                ", valor=" + valor +
+                ", multa=" + multa +
+                ", juros=" + juros +
+                ", agencia='" + agencia + '\'' +
+                ", contaBancaria='" + contaBancaria + '\'' +
+                '}';
+    }
 }
