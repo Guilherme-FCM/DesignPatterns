@@ -14,9 +14,8 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LeituraRetornoBancoBrasil implements LeituraRetorno {
-    @Override
-    public List<Boleto> lerArquivo(URI nomeArquivo) {
+public class LeituraRetornoBancoBrasil {
+    public static List<Boleto> lerArquivo(URI nomeArquivo) {
         var boletos = new ArrayList<Boleto>();
         try {
             var lista = Files.readAllLines(Paths.get(nomeArquivo));
