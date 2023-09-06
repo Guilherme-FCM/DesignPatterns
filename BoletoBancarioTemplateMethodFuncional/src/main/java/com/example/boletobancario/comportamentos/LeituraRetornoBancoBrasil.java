@@ -15,10 +15,9 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-public class LeituraRetornoBancoBrasil extends ProcessarBoletos {
+public class LeituraRetornoBancoBrasil {
 
-    @Override
-    protected Boleto processarLinha(String[] vetor) {
+    public static Boleto processarLinha(String[] vetor) {
         var boleto = new Boleto();
 
         boleto.setId(Integer.parseInt(vetor[0]));

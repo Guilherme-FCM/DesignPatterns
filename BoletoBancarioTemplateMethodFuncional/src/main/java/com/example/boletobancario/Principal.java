@@ -10,12 +10,14 @@ public class Principal {
     public static void main(String[] args) throws URISyntaxException {
         System.out.println("--- BANCO DO BRASIL ---");
         String caminhoBancoBrasil = "file:///home/guilherme/Projects/DesignPatterns/BoletoBancarioTemplateMethod/banco-brasil.csv";
-        var processadorBancoBrasil = new LeituraRetornoBancoBrasil();
-        processadorBancoBrasil.processar(new URI(caminhoBancoBrasil));
+
+        var processadorBoletos = new ProcessarBoletos(LeituraRetornoBancoBrasil::processarLinha);
+        processadorBoletos.processar(new URI(caminhoBancoBrasil));
 
         System.out.println("\n--- BRADESCO ---");
         String caminhoBradesco = "file:///home/guilherme/Projects/DesignPatterns/BoletoBancarioTemplateMethod/bradesco.csv";
-        var processadorBradesco = new LeituraRetornoBradesco();
-        processadorBradesco.processar(new URI(caminhoBradesco));
+
+        processadorBoletos.setProcessarLinha(LeituraRetornoBradesco::processarLinha);
+        processadorBoletos.processar(new URI(caminhoBradesco));
     }
 }

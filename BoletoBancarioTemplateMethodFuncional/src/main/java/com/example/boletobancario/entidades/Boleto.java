@@ -108,6 +108,6 @@ public class Boleto {
                 ", juros=" + juros +
                 ", agencia='" + agencia + '\'' +
                 ", contaBancaria='" + contaBancaria + '\'' +
-                '}';
+                "}\n";
     }
 }
