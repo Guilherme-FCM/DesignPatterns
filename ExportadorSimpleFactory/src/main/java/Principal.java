@@ -19,6 +19,10 @@ public class Principal {
         System.out.println("Lista de Produtos em HTML\n");
         System.out.println(exportadorPadrao.exportar(listaProdutos));
 
+        final var exportadorCsv = ExportadorListaProduto.newInstance("csv");
+        System.out.println("Lista de Produtos em CSV\n");
+        System.out.println(exportadorCsv.exportar(listaProdutos));
+
         final var exportadorMarkdown = ExportadorListaProduto.newInstance("md");
         System.out.println("Lista de Produtos em Markdown\n");
         System.out.println(exportadorMarkdown.exportar(listaProdutos));
