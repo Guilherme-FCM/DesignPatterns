@@ -1,6 +1,0 @@
-com/example/boletobancario/ProcessarBoletos.class
-com/example/boletobancario/interfaces/LeituraRetorno.class
-com/example/boletobancario/comportamentos/LeituraRetornoBradesco.class
-com/example/boletobancario/Principal.class
-com/example/boletobancario/entidades/Boleto.class
-com/example/boletobancario/comportamentos/LeituraRetornoBancoBrasil.class
