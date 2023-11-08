@@ -6,16 +6,20 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
 import java.awt.image.BufferedImage;
-import java.io.IOException;
 
+@Component
 @SessionScope
-public class CaptchaAdapter extends CaptchaGenerator {
-    @Override
-    public byte[] generate() throws IOException {
-        GeneratedCaptcha captcha = new Captcha().generate();
-        setGeneratedCode(captcha.getCode());
+public class CaptchaAdapter extends AbstractCaptchaGenerator {
+    protected GeneratedCaptcha captcha;
 
-        BufferedImage captchaImage = captcha.getImage();
-        return this.bufferedImageToByteArray(captchaImage);
+    @Override
+    public String newCaptcha() {
+        captcha = new Captcha().generate();
+        return captcha.getCode();
+    }
+
+    @Override
+    public BufferedImage getImage() {
+        return captcha.getImage();
     }
 }
