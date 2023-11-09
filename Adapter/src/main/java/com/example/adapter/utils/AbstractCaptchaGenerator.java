@@ -1,36 +1,37 @@
 package com.example.adapter.utils;
 
-import lombok.Data;
+import org.springframework.web.context.annotation.SessionScope;
 
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
-@Data
+@SessionScope
 public abstract class AbstractCaptchaGenerator<T> implements CaptchaGeneratorInterface {
-    protected String generatedCode;
+    private String code;
 
-    protected byte[] bufferedImageToByteArray(BufferedImage image) throws IOException {
-        final var baos = new ByteArrayOutputStream();
-        ImageIO.write(image, "png", baos);
-        return baos.toByteArray();
+    @Override
+    public final byte[] generate() throws IOException {
+        T captcha = build();
+        code = createCaptchaCode(captcha);
+
+        BufferedImage image = getCaptchaImage(captcha);
+        return bufferedImageToByteArray(image);
     }
 
     @Override
     public final boolean confirmCode(String code) {
-        return generatedCode.equals(code);
+        return this.code.equals(code);
     }
 
-    @Override
-    public final byte[] generate() throws IOException {
-        String code = newCaptcha();
-        setGeneratedCode(code);
+    public abstract T build();
+    public abstract String createCaptchaCode(T captcha);
+    public abstract BufferedImage getCaptchaImage(T captcha);
 
-        BufferedImage image = getImage();
-        return bufferedImageToByteArray(image);
+    private byte[] bufferedImageToByteArray(BufferedImage image) throws IOException {
+        final var bytes = new ByteArrayOutputStream();
+        ImageIO.write(image, "png", bytes);
+        return bytes.toByteArray();
     }
-
-    public abstract String newCaptcha();
-    public abstract BufferedImage getImage();
 }

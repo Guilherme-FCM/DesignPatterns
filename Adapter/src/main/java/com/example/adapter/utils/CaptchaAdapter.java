@@ -7,19 +7,20 @@ import org.springframework.web.context.annotation.SessionScope;
 
 import java.awt.image.BufferedImage;
 
-@Component
-@SessionScope
-public class CaptchaAdapter extends AbstractCaptchaGenerator {
-    protected GeneratedCaptcha captcha;
+public class CaptchaAdapter extends AbstractCaptchaGenerator<GeneratedCaptcha> {
 
     @Override
-    public String newCaptcha() {
-        captcha = new Captcha().generate();
+    public GeneratedCaptcha build() {
+        return new Captcha().generate();
+    }
+
+    @Override
+    public String createCaptchaCode(GeneratedCaptcha captcha) {
         return captcha.getCode();
     }
 
     @Override
-    public BufferedImage getImage() {
+    public BufferedImage getCaptchaImage(GeneratedCaptcha captcha) {
         return captcha.getImage();
     }
 }

@@ -1,22 +1,26 @@
 package com.example.adapter.utils;
 
 import net.logicsquad.nanocaptcha.image.ImageCaptcha;
+import org.springframework.stereotype.Component;
 import org.springframework.web.context.annotation.SessionScope;
 
 import java.awt.image.BufferedImage;
 
-@SessionScope
-public class NanoCaptchaAdapter extends AbstractCaptchaGenerator {
-    protected ImageCaptcha captcha;
+@Component
+public class NanoCaptchaAdapter extends AbstractCaptchaGenerator<ImageCaptcha> {
+    @Override
+    public ImageCaptcha build() {
+        return new ImageCaptcha.Builder(200, 50).addContent().build();
+    }
 
     @Override
-    public String newCaptcha() {
-        captcha = new ImageCaptcha.Builder(200, 50).addContent().build();
+    public String createCaptchaCode(ImageCaptcha captcha) {
         return captcha.getContent();
     }
 
     @Override
-    public BufferedImage getImage() {
+    public BufferedImage getCaptchaImage(ImageCaptcha captcha) {
         return captcha.getImage();
     }
+
 }
